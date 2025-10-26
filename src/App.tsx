@@ -1,6 +1,6 @@
 import styles from "./app.module.css"
 import { Login } from "./components/Login"
-import { Home } from "./components/Home/home"
+import { Navbar } from "./components/Navbar/navbar"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 export function App(){
@@ -10,7 +10,7 @@ export function App(){
                 <main>
                     <Routes>
                         <Route path="/" element={<Login />} />
-                        <Route path="/home" element={<Home />} />
+                        <Route path="/home" element={<Navbar />} />
                     </Routes>
                 </main>
             </div>
