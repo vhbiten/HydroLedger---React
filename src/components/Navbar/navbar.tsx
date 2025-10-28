@@ -1,7 +1,17 @@
 import styles from "./styles.module.css"
 import navLogo from "../../assets/navlogo.svg"
+import { LuMenu } from "react-icons/lu"
+import { Drawer } from "@mui/material"
+import { useState } from "react"
+import { Link } from "react-router-dom"
 
 export function Navbar() {
+    const [openMenu, setOpenMenu] = useState(false)
+
+    const handleOpenMenu = () => {
+        setOpenMenu(!openMenu)
+    }
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.navbarContainer}>
@@ -11,13 +21,44 @@ export function Navbar() {
                 </div>
                 
                 <div className={styles.navbarButtons}>
-                    <button className={styles.registerButton}>
+                    <Link to="/home/register">
+                        <button className={styles.registerButton}>
                         Registrar
-                    </button>
-                    <button className={styles.manageButton}>
+                        </button>
+                    </Link>
+                    
+                    <Link to="/home/manage">
+                        <button className={styles.manageButton}>
                         Gerenciar
-                    </button>
+                        </button>
+                    </Link>
+                    
                 </div>
+
+                <div className={styles.navbarMobile}>
+                    <div className={styles.navbarMobileBtns}>
+                        <LuMenu className={styles.navbarMobileBtn} onClick={handleOpenMenu}/>
+                    </div>
+                </div>
+                <Drawer
+                anchor="right"
+                open={openMenu}
+                onClose={handleOpenMenu}
+                >
+                    <div className={styles.Drawer}>
+                        <Link to="/home/register">
+                            <button className={styles.registerButton} onClick={handleOpenMenu}>
+                                Registrar
+                            </button>
+                        </Link>
+
+                        <Link to="/home/manage">
+                            <button className={styles.manageButton} onClick={handleOpenMenu}>
+                                Gerenciar
+                            </button>
+                    </Link>
+                    </div>
+                </Drawer>
             </div>
         </nav>
     )

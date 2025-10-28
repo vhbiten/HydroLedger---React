@@ -9,7 +9,7 @@
 }
 
 .navbarContainer {
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -65,4 +65,39 @@ button:hover {
 
 button:active {
     transform: translateY(0);
+}
+
+.navbarMobile{
+    display: none;
+}
+
+.Drawer {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    margin-top: 10rem;
+    gap: 4rem;
+}
+
+.Drawer button {
+    background: white;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+    .navbarButtons {
+        display: none;
+    }
+
+    .navbarMobile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navbarMobileBtns {
+        color: white;
+        font-size: 1.5rem;
+    }
 }

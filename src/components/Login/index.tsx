@@ -2,36 +2,38 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import logo from "../../assets/logo.svg"
 import styles from "./styles.module.css"
+import { loginService } from "../../services/login"
 
 
 export function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
 
     async function handleLogin(e: React.FormEvent) {
         e.preventDefault()
+        setIsLoading(true)
         
         try {
-            const response = await fetch('https://api-hydroledger.onrender.com/sessions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password })
-            })
-
-            const data = await response.json()
-
-            if (response.ok) {
-                alert('Login realizado com sucesso!')
-                navigate('/home')
-            } else {
-                alert('Erro ao fazer login: ' + (data.message || 'Credenciais inválidas'))
+            const data = await loginService({ email, password })
+            
+            if (data.token) {
+                localStorage.setItem('token', data.token)
             }
+            
+            alert('Login realizado com sucesso!')
+            navigate('/home')
+            
         } catch (error) {
-            alert('Erro ao conectar com o servidor')
+            if (error instanceof Error) {
+                alert('Erro ao fazer login: ' + error.message)
+            } else {
+                alert('Erro ao conectar com o servidor')
+            }
             console.error(error)
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -52,6 +54,7 @@ export function Login() {
                         placeholder="Digite seu e-mail"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        disabled={isLoading}
                         required
                     />
                 </div>
@@ -66,12 +69,13 @@ export function Login() {
                         placeholder="Digite sua senha"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        disabled={isLoading}
                         required
                     />
                 </div>
             </div>
-            <button type="submit" className={styles.loginButton}>
-                <span>Entrar</span>
+            <button type="submit" className={styles.loginButton} disabled={isLoading}>
+                <span>{isLoading ? 'Entrando...' : 'Entrar'}</span>
             </button>
         </form>
     )
