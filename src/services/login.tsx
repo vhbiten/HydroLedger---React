@@ -10,6 +10,7 @@ interface LoginResponse {
         id: string
         email: string
         name: string
+        role: string
     }
 }
 
@@ -30,6 +31,7 @@ export async function loginService(data: LoginData): Promise<LoginResponse> {
         }
 
         return responseData
+        
     } catch (error) {
         if (error instanceof Error) {
             throw error

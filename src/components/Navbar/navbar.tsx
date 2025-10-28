@@ -1,12 +1,14 @@
 import styles from "./styles.module.css"
 import navLogo from "../../assets/navlogo.svg"
-import { LuMenu } from "react-icons/lu"
+import { LuMenu, LuUser, LuLogOut } from "react-icons/lu"
 import { Drawer } from "@mui/material"
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Link, Navigate, useNavigate } from "react-router-dom"
+import { logoutService } from "../../services/logout"
 
 export function Navbar() {
     const [openMenu, setOpenMenu] = useState(false)
+    const navigate = useNavigate()
 
     const handleOpenMenu = () => {
         setOpenMenu(!openMenu)
@@ -27,12 +29,24 @@ export function Navbar() {
                         </button>
                     </Link>
                     
-                    <Link to="/home/manage">
-                        <button className={styles.manageButton}>
-                        Gerenciar
-                        </button>
-                    </Link>
-                    
+                    {localStorage.getItem('role') === 'editor' ? (
+                        <Link to="/home/manage">
+                            <button className={styles.manageButton}>
+                                Gerenciar
+                            </button>
+                        </Link>
+                    ) : null}
+
+                    <div className={styles.navbarProfile}>
+                        <div className={styles.navbarProfileUser}>
+                            <LuUser />
+                            <p className={styles.navbarProfileName}>{localStorage.getItem('name')} {localStorage.getItem('role') === 'editor' ? ', Administrador' : ''}</p>
+                        </div>
+                        <div className={styles.navbarProfileLogOut} onClick={() => logoutService(navigate)}>
+                            <LuLogOut />
+                            <p>Sair</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div className={styles.navbarMobile}>
@@ -46,6 +60,16 @@ export function Navbar() {
                 onClose={handleOpenMenu}
                 >
                     <div className={styles.Drawer}>
+                        <div className={styles.navbarProfile}>
+                            <div className={styles.navbarProfileUser}>
+                                <LuUser />
+                                <p className={styles.navbarProfileName}>{localStorage.getItem('name')}, {localStorage.getItem('role') === 'editor' ? 'Administrador' : ''}</p>
+                            </div>
+                            <div className={styles.navbarProfileLogOut}>
+                                <LuLogOut />
+                                <p onClick={() => logoutService(navigate)}>Sair</p>
+                            </div>
+                        </div>
                         <Link to="/home/register">
                             <button className={styles.registerButton} onClick={handleOpenMenu}>
                                 Registrar
@@ -56,7 +80,8 @@ export function Navbar() {
                             <button className={styles.manageButton} onClick={handleOpenMenu}>
                                 Gerenciar
                             </button>
-                    </Link>
+                        </Link>
+
                     </div>
                 </Drawer>
             </div>

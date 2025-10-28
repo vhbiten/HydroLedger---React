@@ -20,11 +20,13 @@ export function Login() {
             
             if (data.token) {
                 localStorage.setItem('token', data.token)
+                localStorage.setItem('name', data.user?.name ?? '')
+                localStorage.setItem('role', data.user?.role ?? '')
             }
             
             alert('Login realizado com sucesso!')
-            navigate('/home')
-            
+            navigate('/home/register')
+
         } catch (error) {
             if (error instanceof Error) {
                 alert('Erro ao fazer login: ' + error.message)
