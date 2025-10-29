@@ -1,6 +1,7 @@
 import styles from "./styles.module.css"
 import { Navigate } from "react-router-dom"
 import { useState } from "react"
+import { registrarPocos, registrarEfluentes, registrarCloroResidual } from "../../services/send"
 
 type Category = "pocosCaptacao" | "efluente" | "cloroResidual"
 
@@ -36,31 +37,25 @@ export function Register() {
         try {
             setMensagem("Enviando...")
             
-            const response = await fetch("https://api-hydroledger.onrender.com/registros/pocos", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    dataColeta,
-                    numeroPoco: Number(numeroPoco),
-                    hidrometro: Number(hidrometro),
-                    horimetro: Number(horimetro)
-                })
+            await registrarPocos({
+                dataColeta,
+                numeroPoco: Number(numeroPoco),
+                hidrometro: Number(hidrometro),
+                horimetro: Number(horimetro)
             })
             
-            if (response.ok) {
-                setMensagem("Dados registrados com sucesso!")
-                setDataColeta("")
-                setNumeroPoco("")
-                setHidrometro("")
-                setHorimetro("")
-            } else {
-                setMensagem("Erro ao registrar dados")
-            }
+            setMensagem("Dados registrados com sucesso!")
+            setDataColeta("")
+            setNumeroPoco("")
+            setHidrometro("")
+            setHorimetro("")
+
         } catch (error) {
-            setMensagem("Erro ao conectar com a API")
+            if (error instanceof Error) {
+                setMensagem(error.message)
+            } else {
+                setMensagem("Erro ao conectar com a API")
+            }
         }
     }
 
@@ -68,39 +63,33 @@ export function Register() {
         try {
             setMensagem("Enviando...")
             
-            const response = await fetch("https://api-hydroledger.onrender.com/registros/efluentes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    dataColeta,
-                    vazao1: Number(vazao1),
-                    vazao2: Number(vazao2),
-                    vazao3: Number(vazao3),
-                    ph: Number(ph),
-                    temperatura: Number(temperatura),
-                    condutividade: Number(condutividade),
-                    SD30: Number(sd30)
-                })
+            await registrarEfluentes({
+                dataColeta,
+                vazao1: Number(vazao1),
+                vazao2: Number(vazao2),
+                vazao3: Number(vazao3),
+                ph: Number(ph),
+                temperatura: Number(temperatura),
+                condutividade: Number(condutividade),
+                SD30: Number(sd30)
             })
             
-            if (response.ok) {
-                setMensagem("Dados registrados com sucesso!")
-                setDataColeta("")
-                setVazao1("")
-                setVazao2("")
-                setVazao3("")
-                setPh("")
-                setTemperatura("")
-                setCondutividade("")
-                setSd30("")
-            } else {
-                setMensagem("Erro ao registrar dados")
-            }
+            setMensagem("Dados registrados com sucesso!")
+            setDataColeta("")
+            setVazao1("")
+            setVazao2("")
+            setVazao3("")
+            setPh("")
+            setTemperatura("")
+            setCondutividade("")
+            setSd30("")
+
         } catch (error) {
-            setMensagem("Erro ao conectar com a API")
+            if (error instanceof Error) {
+                setMensagem(error.message)
+            } else {
+                setMensagem("Erro ao conectar com a API")
+            }
         }
     }
 
@@ -108,35 +97,29 @@ export function Register() {
         try {
             setMensagem("Enviando...")
             
-            const response = await fetch("https://api-hydroledger.onrender.com/registros/cloro-residual", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    dataColeta,
-                    cozinha: Number(cozinha),
-                    saidaTratamento: Number(saidaTratamento),
-                    bebedouro1: Number(bebedouro1),
-                    bebedouro2: Number(bebedouro2),
-                    bebedouro3: Number(bebedouro3)
-                })
+            await registrarCloroResidual({
+                dataColeta,
+                cozinha: Number(cozinha),
+                saidaTratamento: Number(saidaTratamento),
+                bebedouro1: Number(bebedouro1),
+                bebedouro2: Number(bebedouro2),
+                bebedouro3: Number(bebedouro3)
             })
             
-            if (response.ok) {
-                setMensagem("Dados registrados com sucesso!")
-                setDataColeta("")
-                setCozinha("")
-                setSaidaTratamento("")
-                setBebedouro1("")
-                setBebedouro2("")
-                setBebedouro3("")
-            } else {
-                setMensagem("Erro ao registrar dados")
-            }
+            setMensagem("Dados registrados com sucesso!")
+            setDataColeta("")
+            setCozinha("")
+            setSaidaTratamento("")
+            setBebedouro1("")
+            setBebedouro2("")
+            setBebedouro3("")
+
         } catch (error) {
-            setMensagem("Erro ao conectar com a API")
+            if (error instanceof Error) {
+                setMensagem(error.message)
+            } else {
+                setMensagem("Erro ao conectar com a API")
+            }
         }
     }
 
