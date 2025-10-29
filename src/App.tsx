@@ -1,5 +1,5 @@
 import styles from "./app.module.css"
-import { Login } from "./components/Login"
+import { Login } from "./components/Login/sessionLogin"
 import { Navbar } from "./components/Navbar/navbar"
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 import { Register } from "./components/Register/register"

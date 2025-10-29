@@ -1,0 +1,265 @@
+.registerContainer {
+    max-width: 75rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    padding-top: 6rem;
+    min-height: 100vh;
+}
+
+.registerContainer * {
+    font-size: 1rem;
+}
+
+.registerContainer h3 {
+    font-size: 1.3rem;
+}
+
+.categorySelection {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.categorySelection h3 {
+    margin: 0 0 1rem;
+    color: #333;
+}
+
+.categoryButtons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.categoryButtons button {
+    flex: 1;
+    min-width: 150px;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #007bc8;
+    background: white;
+    color: #007bc8;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.categoryButtons button:hover {
+    background: #f0f8ff;
+}
+
+.categoryButtons button.active {
+    background: linear-gradient(135deg, #007bc8, #02e1a2);
+    color: white;
+    border: 2px transparent;
+}
+
+.dataColeta {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dataColeta div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.dataColeta label {
+    color: #333;
+    font-weight: 600;
+}
+
+.dataColeta input {
+    padding: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    max-width: 300px;
+}
+
+.dataColeta input:focus {
+    outline: none;
+    border-color: #007bc8;
+}
+
+.pocosCaptacao,
+.efluentes,
+.cloroResidual {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 500px;
+}
+
+.pocosCaptacao {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.pocosCaptacao label {
+    color: #333;
+    font-weight: 600;
+}
+
+.pocosCaptacao select,
+.pocosCaptacao input {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.pocosCaptacao select:focus,
+.pocosCaptacao input:focus {
+    outline: none;
+    border-color: #007bc8;
+}
+
+.efluentes {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.efluentes h3 {
+    color: #007bc8;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 0;
+}
+
+.efluentes > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.efluentes label {
+    color: #333;
+    font-weight: 600;
+}
+
+.efluentes input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.efluentes input:focus {
+    outline: none;
+    border-color: #007bc8;
+}
+
+.cloroResidual {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.cloroResidual h3 {
+    color: #007bc8;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 0;
+}
+
+.cloroResidual > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cloroResidual > div > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.cloroResidual label {
+    color: #333;
+    font-weight: 600;
+}
+
+.cloroResidual input {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.cloroResidual input:focus {
+    outline: none;
+    border-color: #007bc8;
+}
+
+.mensagem {
+    text-align: center;
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 400px;
+    border-radius: 8px;
+    font-weight: 600;
+    background: #e8f4fd;
+    color: #007bc8;
+}
+
+.submitBtn {
+    width: 100%;
+    max-width: 300px;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #007bc8, #02e1a2);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0 4px 12px rgba(0, 123, 200, 0.3);
+}
+
+.submitBtn:hover {
+    box-shadow: 0 6px 16px rgba(0, 123, 200, 0.4);
+}
+
+@media (min-width: 769px) {
+    .registerContainer {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .registerContainer {
+        padding: 1rem;
+        padding-top: 5rem;
+    }
+
+    .categoryButtons {
+        flex-direction: column;
+    }
+    
+    .categoryButtons button {
+        width: 100%;
+    }
+    
+    .pocosCaptacao select,
+    .pocosCaptacao input,
+    .cloroResidual input,
+    .dataColeta input {
+        max-width: 100%;
+    }
+}

@@ -2,8 +2,8 @@ import styles from "./styles.module.css"
 import navLogo from "../../assets/navlogo.svg"
 import { LuMenu, LuUser, LuLogOut } from "react-icons/lu"
 import { Drawer } from "@mui/material"
-import { useEffect, useState } from "react"
-import { Link, Navigate, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { logoutService } from "../../services/logout"
 
 export function Navbar() {
