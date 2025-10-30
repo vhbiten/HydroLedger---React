@@ -24,7 +24,7 @@ export function Login() {
                 localStorage.setItem('role', data.user?.role ?? '')
             }
             
-            alert('Login realizado com sucesso!')
+            
             navigate('/home/register')
 
         } catch (error) {
