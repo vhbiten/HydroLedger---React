@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Table, Select, Button } from "@radix-ui/themes"
 import { buscarDadosHistorico } from "../../services/fetch"
+import { dateFormat } from "../../services/formatdate"
+import { parseISO, isAfter, isBefore, isEqual, startOfDay } from 'date-fns'
 import styles from "./styles.module.css"
 
 export function Manage() {
@@ -73,19 +75,58 @@ export function Manage() {
                 <Table.Root>
                     <Table.Header>
                         <Table.Row>
-                            {Object.keys(dados[0]).map((key) => (
-                                <Table.ColumnHeaderCell key={key}> {key} </Table.ColumnHeaderCell>
-                            ))}
+                            {Object.keys(dados[0])
+                                .filter(key => !["id", "createdAt", "updatedAt"].includes(key))
+                                .map((key) => (
+                                    <Table.ColumnHeaderCell key={key}>
+                                        {key === "dataColeta" ? "Data":
+                                        key === "numeroPoco" ? "Poço":
+                                        key === "hidrometro" ? "Hidrometro (m³)":
+                                        key === "horimetro" ? "Horímetro (h)":
+
+                                        key === "vazao1" ? "Vazão 1 (m³/h)":
+                                        key === "vazao2" ? "Vazão 2 (m³/h)":
+                                        key === "vazao3" ? "Vazão 3 (m³/h)":
+                                        key === "ph" ? "pH":
+                                        key === "temperatura" ? "Temperatura (°C)":
+                                        key === "condutividade" ? "Condutividade (µs)":
+                                        key === "SD30" ? "SD30 (mL/L)":
+
+                                        key === "cozinha" ? "Cozinha (mg/L)":
+                                        key === "saidaTratamento" ? "Saída Tratamento (mg/L)":
+                                        key === "bebedouro1" ? "Bebedouro 1 (mg/L)":
+                                        key === "bebedouro2" ? "Bebedouro 2 (mg/L)":
+                                        key === "bebedouro3" ? "Bebedouro 3 (mg/L)":
+                                        
+                                        key}
+                                    </Table.ColumnHeaderCell>
+                                ))}
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        {dados.map((item, index) => (
-                            <Table.Row key={index}>
-                                {Object.values(item).map((value: any, i) => (
-                                    <Table.Cell key={i}> {value ?? "-"} </Table.Cell>
-                                ))}
-                            </Table.Row>
-                        ))}
+                        {[...dados]
+                            .sort((a, b) => new Date(a.dataColeta).getTime() - new Date(b.dataColeta).getTime())
+                            .filter(item => tipoTabela !== "pocos" || item.numeroPoco?.toString() === numeroPoco)
+                            .filter(item => {
+                                let data = startOfDay(parseISO(item.dataColeta))
+                                let inicio = dataInicio ? startOfDay(parseISO(dataInicio)) : null
+                                let fim = dataFim ? startOfDay(parseISO(dataFim)) : null
+                                return (!inicio || isAfter(data, inicio) || isEqual(data, inicio)) &&
+                                       (!fim || isBefore(data, fim) || isEqual(data, fim))
+                            })
+                            .map((item, index) => (
+                                <Table.Row key={index}>
+                                    {Object.keys(item)
+                                        .filter(key => !["id", "createdAt", "updatedAt"].includes(key))
+                                        .map((key, i) => (
+                                            <Table.Cell key={i}>
+                                                {key === "dataColeta"
+                                                    ? dateFormat(item[key])
+                                                    : item[key] ?? "-"}
+                                            </Table.Cell>
+                                        ))}
+                                </Table.Row>
+                            ))}
                     </Table.Body>
                 </Table.Root>
             )}
