@@ -2,6 +2,12 @@
 
 Sistema de gerenciamento e monitoramento ambiental, desenvolvido com React e Node.js.
 
+## 📹 Demonstração em Vídeo
+
+[![Demonstração do HydroLedger](https://img.youtube.com/vi/r1VwZq_N_Gc/maxresdefault.jpg)](https://www.youtube.com/watch?v=r1VwZq_N_Gc)
+
+> **Clique na imagem acima para assistir ao vídeo de demonstração**
+
 ## 📋 Sobre o Projeto
 
 HydroLedger é uma aplicação web desenvolvida para área da engenharia ambiental como uma ferramenta para registrar e monitorar dados diários de campo. Ele permite o registro através de qualquer dispositivo de dados parâmetros:
